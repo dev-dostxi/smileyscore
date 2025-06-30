@@ -43,7 +43,8 @@ class CsfRating extends Component
 
     public function submitRating()
     {
-        if (!$this->validateRecaptcha()) return;
+        // no captcha
+        //if (!$this->validateRecaptcha()) return;
 
         $ip = request()->ip();
         $key = 'rating:' . $this->section->id . ':' . $ip;
@@ -66,7 +67,7 @@ class CsfRating extends Component
         ]);
 
         $this->submitted = true;
-         $this->reset('rating', 'recaptchaToken');
+        $this->reset('rating', 'recaptchaToken');
     }
 
     protected function validateRecaptcha(): bool

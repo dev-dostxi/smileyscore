@@ -118,23 +118,23 @@
     <script>
         let recaptchaToken = null;
 
-grecaptcha.ready(function () {
-    grecaptcha.execute('{{ config('services.nocaptcha.sitekey') }}', { action: 'rating' })
-        .then(function (token) {
-            recaptchaToken = token;
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ config('services.nocaptcha.sitekey') }}', { action: 'rating' })
+                .then(function (token) {
+                    recaptchaToken = token;
+                });
         });
-});
 
-Livewire.on('get-recaptcha-token', function () {
-    if (recaptchaToken) {
-        Livewire.find(@this.__instance.id).call('setRecaptchaTokenAndSubmit', recaptchaToken);
-    } else {
-        grecaptcha.execute('{{ config('services.nocaptcha.sitekey') }}', { action: 'rating' })
-            .then(function (token) {
-                Livewire.find(@this.__instance.id).call('setRecaptchaTokenAndSubmit', token);
-            });
-    }
-});
+        Livewire.on('get-recaptcha-token', function () {
+            if (recaptchaToken) {
+                Livewire.find(@this.__instance.id).call('setRecaptchaTokenAndSubmit', recaptchaToken);
+            } else {
+                grecaptcha.execute('{{ config('services.nocaptcha.sitekey') }}', { action: 'rating' })
+                    .then(function (token) {
+                        Livewire.find(@this.__instance.id).call('setRecaptchaTokenAndSubmit', token);
+                    });
+            }
+        });
 
     </script>
     @endpush
