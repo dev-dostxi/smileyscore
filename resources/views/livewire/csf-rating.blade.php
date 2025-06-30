@@ -32,7 +32,7 @@
                         }
                     }, 1000);"
                 style="color: green; font-weight: bold; margin-top: 20px;">
-                <h1><i>Thank you for rating the {{ strtoupper($section->name) }} section!</i></h1>
+                <h1><i>Thank you</i> for rating the {{ strtoupper($section->name) }} section!</h1>
                 <p style="color: gray";>Redirecting back to CSF page in <span x-text="count"></span></p>
                 <a href="/{{ $section->slug ?? $section->name }}/csf" 
                 style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; background-color: #2563eb; color: white; border-radius: 0.375rem; text-decoration: none;">
@@ -51,12 +51,12 @@
                 <input type="hidden" wire:model="recaptchaToken">
 
                  <div style="margin-top: 1.5rem; width: 100%; max-width: 500px;">
-                    <label for="nickname" style="display: block; text-align: left; margin-bottom: 0.5rem;">Nickname (optional):</label>
+                    <label for="nickname" style="display: block; text-align: left; margin-bottom: 0.5rem;">Name (optional):</label>
                     <input 
                         type="text" 
                         id="nickname" 
-                        wire:model.defer="nickname" 
-                        placeholder="Your nickname" 
+                        wire:model="nickname" 
+                        placeholder="Your name" 
                         style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem;"
                     >
                     @error('nickname') 
@@ -69,7 +69,7 @@
                     <input
                         type="text" 
                         id="comment" 
-                        wire:model.defer="comment" 
+                        wire:model="comment" 
                         placeholder="Write your feedback here" 
                         rows="1" 
                         style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem; resize: vertical;"

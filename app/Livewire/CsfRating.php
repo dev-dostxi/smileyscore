@@ -16,6 +16,7 @@ class CsfRating extends Component
     public $section;
     public $rating = null;
     public $nickname = '';
+    public $comment = '';
     public $submitted = false;
     public $recaptchaToken;
 
@@ -58,11 +59,15 @@ class CsfRating extends Component
 
         $this->validate([
             'rating' => 'required|integer|min:1|max:5',
+            'nickname' => 'nullable|string|max:100',
+            'comment' => 'nullable|string|max:1000',
         ]);
 
         Rating::create([
             'section_id' => $this->section->id,
             'rating' => $this->rating,
+            'nickname' => $this->nickname,
+            'comment' => $this->comment,
             'ip' => request()->ip(),
         ]);
 
