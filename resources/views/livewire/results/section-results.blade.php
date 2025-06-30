@@ -1,9 +1,3 @@
-@extends('layouts.dashboard')
-
-@section('title', 'Results')
-
-@section('content')
-
 <div class="max-w-5xl mx-auto space-y-6 p-4">
     <div class="flex gap-4 items-end mb-4">
         <div>
@@ -23,11 +17,11 @@
 
     @if ($startDate || $endDate)
         <div class="mb-4 text-sm text-gray-600 dark:text-gray-300">
-    Showing results 
-    @if ($startDate) from <strong>{{ $this->formattedStartDate }}</strong> @endif
-    @if ($startDate && $endDate) to @endif
-    @if ($endDate) <strong>{{ $this->formattedEndDate }}</strong> @endif
-</div>
+            Showing results 
+            @if ($startDate) from <strong>{{ $this->formattedStartDate }}</strong> @endif
+            @if ($startDate && $endDate) to @endif
+            @if ($endDate) <strong>{{ $this->formattedEndDate }}</strong> @endif
+        </div>
     @endif
 
     @if ($section)
@@ -75,4 +69,3 @@
         </div>
     @endif
 </div>
-@endsection

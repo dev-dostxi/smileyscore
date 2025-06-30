@@ -31,7 +31,7 @@
                 @foreach ($sections as $section)
                     <a href="{{ url('results') . '?section=' . $section->slug }}"
                        class="block px-3 py-2 rounded-md transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white">
-                        {{ $section->name }}
+                        {{ strtoupper($section->name) }}
                     </a>
                 @endforeach
             </div>

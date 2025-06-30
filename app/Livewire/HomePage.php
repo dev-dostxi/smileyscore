@@ -4,7 +4,9 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Section;
+use Livewire\Attributes\Layout;
 
+#[Layout('layouts.guest')]
 class HomePage extends Component
 {
     public $sections;
@@ -28,6 +30,6 @@ class HomePage extends Component
 
     public function render()
     {
-        return view('livewire.home-page')->layout('layouts.app');
+        return view('livewire.home-page');
     }
 }
