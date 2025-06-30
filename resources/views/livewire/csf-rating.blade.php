@@ -1,5 +1,6 @@
 <div style="
   display: flex;
+  font-family: 'Figtree', sans-serif;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -48,6 +49,36 @@
             </div>
             <form wire:submit.prevent="submitRating">
                 <input type="hidden" wire:model="recaptchaToken">
+
+                 <div style="margin-top: 1.5rem; width: 100%; max-width: 500px;">
+                    <label for="nickname" style="display: block; text-align: left; margin-bottom: 0.5rem;">Nickname (optional):</label>
+                    <input 
+                        type="text" 
+                        id="nickname" 
+                        wire:model.defer="nickname" 
+                        placeholder="Your nickname" 
+                        style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem;"
+                    >
+                    @error('nickname') 
+                        <div style="color: red;">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div style="margin-top: 1.5rem; width: 100%; max-width: 500px;">
+                    <label for="comment" style="display: block; text-align: left; margin-bottom: 0.5rem;">Comment (optional):</label>
+                    <input
+                        type="text" 
+                        id="comment" 
+                        wire:model.defer="comment" 
+                        placeholder="Write your feedback here" 
+                        rows="1" 
+                        style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem; resize: vertical;"
+                    ></textarea>
+                    @error('comment') 
+                        <div style="color: red;">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <div style="display: flex; justify-content: center; gap: 2rem; width: 100%; max-width: 100vw;">
                     @for ($i = 1; $i <= 5; $i++)
                         <label style="cursor: pointer; font-size: user-select: none;" wire:click="rate({{ $i }})">

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
-    protected $fillable = ['section_id', 'rating', 'nickname', 'ip'];
+    protected $fillable = ['section_id', 'rating', 'nickname', 'comment', 'ip'];
     
     protected $casts = [
         'created_at' => 'datetime',
