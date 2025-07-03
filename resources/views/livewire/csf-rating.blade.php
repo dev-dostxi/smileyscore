@@ -31,7 +31,7 @@
                             window.location.href = '/{{ $section->slug ?? $section->name }}/csf';
                         }
                     }, 1000);"
-                style="color: green; font-weight: bold; margin-top: 20px;">
+                style="color: green; font-weight: bold;">
                 <h1><i>Thank you</i> for rating the {{ strtoupper($section->name) }} section!</h1>
                 <p style="color: gray";>Redirecting back to CSF page in <span x-text="count"></span></p>
                 <a href="/{{ $section->slug ?? $section->name }}/csf" 
@@ -40,44 +40,55 @@
                 </a>
             </div>
         @else
-            <h1>We’d love to hear your thoughts about your experience.</h1>
-            <div style="display: flex; justify-content: center;  align-items: center; flex-wrap: wrap; gap: 2rem; width: 100%; max-width: 100vw; text-align: center;">
-                <h2>How would you rate the {{ strtoupper($section->name) }} section?</h2>
-            </div>
+            <h1 style="margin-bottom: 0;">We’d love to hear your thoughts about your experience.</h1>
+            <h2 style="margin-top: 0; margin-bottom: 0.5rem; text-align: center;">
+                How would you rate the {{ strtoupper($section->name) }} section?
+            </h2>
             <div wire:loading>
                 Submitting...
             </div>
             <form wire:submit.prevent="submitRating">
                 <input type="hidden" wire:model="recaptchaToken">
 
-                 <div style="margin-top: 1.5rem; width: 100%; max-width: 500px;">
-                    <label for="nickname" style="display: block; text-align: left; margin-bottom: 0.5rem;">Name (optional):</label>
-                    <input 
-                        type="text" 
-                        id="nickname" 
-                        wire:model="nickname" 
-                        placeholder="Your name" 
-                        style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem;"
-                    >
-                    @error('nickname') 
-                        <div style="color: red;">{{ $message }}</div>
-                    @enderror
+                <div x-data="{ showFeedback: false }" class="w-full flex flex-col items-center">
+                <button 
+                    type="button"
+                    @click="showFeedback = !showFeedback"
+                    style="margin-bottom: 1rem; padding: 0.5rem 1rem; background-color: #f3f4f6; border: 1px solid #d1d5db; border-radius: 0.375rem;">
+                    <span x-text="showFeedback ? 'Hide Feedback' : 'Add Feedback (Optional)'"></span>
+                </button>
+
+                    <div x-show="showFeedback" x-transition class="w-full flex flex-col items-center">
+                        <div style="margin-top: 1.5rem; width: 100%; max-width: 500px;">
+                            <label for="nickname" style="display: block; text-align: left; margin-bottom: 0.5rem;">Name (optional):</label>
+                            <input 
+                                type="text" 
+                                id="nickname" 
+                                wire:model="nickname" 
+                                placeholder="Your name" 
+                                style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem;"
+                            >
+                            @error('nickname') 
+                                <div style="color: red;">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div style="margin-top: 1.5rem; width: 100%; max-width: 500px;">
+                            <label for="comment" style="display: block; text-align: left; margin-bottom: 0.5rem;">Comment (optional):</label>
+                            <input
+                                type="text" 
+                                id="comment" 
+                                wire:model="comment" 
+                                placeholder="Write your feedback here" 
+                                style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem;"
+                            >
+                            @error('comment') 
+                                <div style="color: red;">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
-                <div style="margin-top: 1.5rem; width: 100%; max-width: 500px;">
-                    <label for="comment" style="display: block; text-align: left; margin-bottom: 0.5rem;">Comment (optional):</label>
-                    <input
-                        type="text" 
-                        id="comment" 
-                        wire:model="comment" 
-                        placeholder="Write your feedback here" 
-                        rows="1" 
-                        style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem; resize: vertical;"
-                    ></textarea>
-                    @error('comment') 
-                        <div style="color: red;">{{ $message }}</div>
-                    @enderror
-                </div>
 
                 <div style="display: flex; justify-content: center; gap: 2rem; width: 100%; max-width: 100vw;">
                     @for ($i = 1; $i <= 5; $i++)
@@ -133,7 +144,13 @@
 
             @media (min-width: 481px) and (max-width: 1024px) {
             .emoji-label {
-                font-size: 10vw; /* tablets and small laptops */
+                font-size: 8vw; /* tablets and small laptops */
+            }
+            h1 {
+                font-size: 1.5rem;
+            } 
+            h2 {
+                font-size: 1rem;
             }
             }
 
@@ -144,6 +161,7 @@
             }
         </style>
         
+    <!--
     @push('scripts')
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.nocaptcha.sitekey') }}"></script>
     <script>
@@ -169,6 +187,7 @@
 
     </script>
     @endpush
+    -->
 
     </div>
 </div>
