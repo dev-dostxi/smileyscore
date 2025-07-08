@@ -2,15 +2,20 @@
     <div class="flex gap-4 items-end mb-4">
         <div>
             <label class="block text-sm text-gray-600 dark:text-gray-300">Start Date</label>
-            <input type="date" wire:model="startDate" class="rounded-md text-sm px-1 border-gray-300 dark:bg-gray-800 dark:text-white">
+            <input type="date" wire:model.defer="startDate" class="rounded-md text-sm px-1 border-gray-300 dark:bg-gray-800 dark:text-white">
         </div>
         <div>
             <label class="block text-sm text-gray-600 dark:text-gray-300 ">End Date</label>
-            <input type="date" wire:model="endDate" class="rounded-md text-sm px-1 border-gray-300 dark:bg-gray-800 dark:text-white">
+            <input type="date" wire:model.defer="endDate" class="rounded-md text-sm px-1 border-gray-300 dark:bg-gray-800 dark:text-white">
         </div>
-        <div>
-            <button wire:click="applyFilters" class="px-2 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700">
+        <div class="flex gap-2">
+            <button wire:click="applyFilters"
+                class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700">
                 Filter
+            </button>
+            <button wire:click="resetFilters"
+                class="px-3 py-1.5 text-sm bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
+                Reset
             </button>
         </div>
     </div>
@@ -24,8 +29,11 @@
         </div>
     @endif
 
+    <div class="mb-4 p-4 text-sm dark:text-white bg-blue-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm">
+        Average Rating: <span class="font-extrabold text-blue-600 dark:text-blue-400">{{ number_format($averageRating, 2) }}</span>
+    </div>
     @if ($section)
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm overflow-hidden">
+        <div class="dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm overflow-hidden">
             <div class="px-6 py-4 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-xl font-semibold text-gray-800 dark:text-white uppercase">
                     {{ $section }}

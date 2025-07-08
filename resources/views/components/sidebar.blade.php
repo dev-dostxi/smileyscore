@@ -30,7 +30,7 @@
 
             <div x-show="open" x-cloak class="space-y-1 ml-6">
                 @foreach ($sections as $section)
-                    <a href="{{ url('results') . '?section=' . $section->slug }}"
+                    <a href="{{ route('results.section', ['section' => $section->slug]) }}"
                        class="block px-3 py-2 rounded-md transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white">
                         {{ strtoupper($section->name) }}
                     </a>

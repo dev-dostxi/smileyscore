@@ -62,7 +62,6 @@
 
             <main class="grow flex justify-center p-2 bg-blue-50 dark:bg-gray-800">
                 <div class="w-full transition-all duration-700 mb-24">
-                        
                     {{ $slot }}
                 </div>
             </main>
@@ -71,7 +70,6 @@
 
     @stack('modals')
     @livewireScripts
-    <script src="//unpkg.com/alpinejs" defer></script>
 </body>
 <script>
 function toggleDarkMode() {
